@@ -3,6 +3,7 @@ package com.example.spring_rest.controller;
 import com.example.spring_rest.Interfaces.ApiResponses;
 import com.example.spring_rest.dto.LoginRequest;
 import com.example.spring_rest.dto.LoginResponse;
+import com.example.spring_rest.dto.SignupRequest;
 import com.example.spring_rest.model.User;
 import com.example.spring_rest.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("signup")
-    public ApiResponses signUpUser (@RequestBody User userData){
+    public ApiResponses signUpUser (@RequestBody SignupRequest userData){
         return authService.signupUser(userData);
     }
 }

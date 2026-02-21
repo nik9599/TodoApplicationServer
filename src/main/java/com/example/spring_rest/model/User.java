@@ -3,12 +3,16 @@ package com.example.spring_rest.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.stereotype.Component;
 
-@Data
-@NoArgsConstructor
-//@AllArgsConstructor
-@Component
+import javax.persistence.*;
+
+@Entity                     // Marks this class as a Hibernate entity
+@Table(name = "users")
+@Cacheable()
+
 public class User {
     public Integer getId() {
         return id;
@@ -42,7 +46,10 @@ public class User {
         this.password = password;
     }
 
+    @Id                     // Primary key column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-increment ID (optional)
     private Integer id;
+
     private String userName;
     private String email;
 
@@ -57,7 +64,7 @@ public class User {
     }
 
     private String password;
-
+    public  User() {}
     public User(int id, String userName, String email, String password){
      this.id = id;
      this.userName = userName;

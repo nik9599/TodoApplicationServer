@@ -4,6 +4,7 @@ import com.example.spring_rest.Interfaces.ApiResponses;
 import com.example.spring_rest.dto.ApiResponse;
 import com.example.spring_rest.dto.LoginRequest;
 import com.example.spring_rest.dto.LoginResponse;
+import com.example.spring_rest.dto.SignupRequest;
 import com.example.spring_rest.model.User;
 import com.example.spring_rest.repo.AuthRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class AuthService {
     private AuthRepo authRepo;
 
 
-    public ApiResponses signupUser(User loginData) {
+    public ApiResponses signupUser(SignupRequest loginData) {
         int resp = authRepo.signUpUser(loginData);
 
         if (resp > 0) {
@@ -28,6 +29,7 @@ public class AuthService {
 
     public LoginResponse loginUser (LoginRequest userResponse){
       User userData = authRepo.fetchUserByEmail(userResponse.getEmail());
+
       if(userData != null) {
           if (userData.getPassword().equals(userResponse.getPassword())) {
               return new LoginResponse(userData.getEmail(), userData.getUserName());
